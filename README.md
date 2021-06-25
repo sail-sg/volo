@@ -28,14 +28,8 @@ ImageNet top-1 accuracy comparison with the state-of-the-art (sota) CNN-based an
 
 ## 1. Requirements
 
-```
-torch>=1.7.0
-torchvision>=0.8.0
-[timm](https://github.com/rwightman/pytorch-image-models)==0.4.5
-[tlt](https://github.com/zihangJiang/TokenLabeling)==0.1.0
-pyyaml
-apex-amp
-```
+torch>=1.7.0; torchvision>=0.8.0; [timm](https://github.com/rwightman/pytorch-image-models)==0.4.5; [tlt](https://github.com/zihangJiang/TokenLabeling)==0.1.0; pyyaml; apex-amp
+
 
 data prepare: ImageNet with the following folder structure, you can extract imagenet by this [script](https://gist.github.com/BIGBALLON/8a71d225eff18d88e469e6ea9b39cef4).
 
@@ -187,7 +181,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 /path/to/imagenet 
 
 
 ## 5. Acknowledgement
-We gratefully acknowledge the support of NVIDIA AI Tech Center (NVAITC) to this research project, especially the great helps in computation and technique support from Terry Jianxiong Yin (NVAITC), Qingyi Tao (NVAITC).
+We gratefully acknowledge the support of NVIDIA AI Tech Center (NVAITC) to this research project, especially the great helps in GPU technology supports from Terry Jianxiong Yin (NVAITC) and Qingyi Tao (NVAITC).
 
 Related project: [T2T-ViT](https://github.com/yitu-opensource/T2T-ViT), [Token_labeling](https://github.com/zihangJiang/TokenLabeling), [pytorch-image-models](https://github.com/rwightman/pytorch-image-models), [official imagenet example](https://github.com/pytorch/examples/tree/master/imagenet)
 
