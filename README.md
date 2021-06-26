@@ -185,3 +185,6 @@ We gratefully acknowledge the support of NVIDIA AI Tech Center (NVAITC) to this 
 
 Related project: [T2T-ViT](https://github.com/yitu-opensource/T2T-ViT), [Token_labeling](https://github.com/zihangJiang/TokenLabeling), [pytorch-image-models](https://github.com/rwightman/pytorch-image-models), [official imagenet example](https://github.com/pytorch/examples/tree/master/imagenet)
 
+## LICENSE
+
+This repo is under the Apache-2.0 license. For commercial use, please contact with the authors.
