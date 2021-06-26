@@ -135,7 +135,7 @@ Train volo_d1 on 224 with 310 epoch, acc=84.2
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 /path/to/imagenet \
   --model volo_d1 --img-size 224 \
-  -b 128 --lr 1.6e-3 --img-size 224 --drop-path 0.1 --apex-amp \
+  -b 128 --lr 1.6e-3 --drop-path 0.1 --apex-amp \
   --token-label --token-label-size 14 --token-label-data /path/to/token_label_data
 ```
 
@@ -162,7 +162,7 @@ Train volo_d2 on 224 with 300 epoch, acc=85.2
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 /path/to/imagenet \
   --model volo_d2 --img-size 224 \
-  -b 128 --lr 1.0e-3 --img-size 224 --drop-path 0.2 --apex-amp \
+  -b 128 --lr 1.0e-3 --drop-path 0.2 --apex-amp \
   --token-label --token-label-size 14 --token-label-data /path/to/token_label_data
 ```
 
