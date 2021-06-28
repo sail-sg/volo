@@ -14,6 +14,8 @@ ImageNet top-1 accuracy comparison with the state-of-the-art (sota) CNN-based an
 
 (Updating... codes and models for downstream tasks like semantic segmentation are coming soon.)
 
+###You may be also interested in our MLP-like Vision Transformer: [Vision Permutator](https://github.com/Andrew-Qibin/VisionPermutator).
+
 ## Reference
 ```
 @misc{yuan2021volo,
