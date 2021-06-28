@@ -663,8 +663,8 @@ def volo_d1(pretrained=False, **kwargs):
     embed_dims = [192, 384, 384, 384]
     num_heads = [6, 12, 12, 12]
     mlp_ratios = [3, 3, 3, 3]
-    downsamples = [True, False, False, False] # do downsampling after first block
-    outlook_attention = [True, False, False, False ]
+    downsamples = [True, False, False, False]  # do downsampling after first block
+    outlook_attention = [True, False, False, False]
     # first block is outlooker (stage1), the other three are transformer (stage2)
     model = VOLO(layers,
                  embed_dims=embed_dims,
