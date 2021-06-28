@@ -67,34 +67,50 @@ class OutlookAttention(nn.Module):
         self.attn_drop = nn.Dropout(attn_drop)
         self.proj = nn.Linear(dim, dim)
         self.proj_drop = nn.Dropout(proj_drop)
-
-        self.unfold = nn.Unfold(kernel_size=kernel_size, padding=padding, stride=stride)
-        self.pool = nn.AvgPool2d(kernel_size=stride, stride=stride, ceil_mode=True)
+        if self.stride == 1:
+            self.unfold = nn.Unfold(kernel_size=kernel_size*2-1, padding=padding*2, stride=1)
+        else:
+            self.unfold = nn.Unfold(kernel_size=kernel_size, padding=padding, stride=stride)
+            self.pool = nn.AvgPool2d(kernel_size=stride, stride=stride, ceil_mode=True)
 
     def forward(self, x):
         B, H, W, C = x.shape
 
         v = self.v(x).permute(0, 3, 1, 2)  # B, C, H, W
+        if self.stride == 1:
+            h, w = H, W
+            v = self.unfold(v).reshape(B, self.num_heads, C // self.num_heads,
+                                       (self.kernel_size * 2 - 1)**2,
+                                       h * w).permute(0, 1, 4, 3, 2)  # B,H,N,(2k-1)x(2k-1),C/H
+            # JK: use unfold + matmul is memory consuming, you can use ddf op to implement this
+            attn = x
+        else:
+            h, w = math.ceil(H / self.stride), math.ceil(W / self.stride)
+            v = self.unfold(v).reshape(B, self.num_heads, C // self.num_heads,
+                                       self.kernel_size * self.kernel_size,
+                                       h * w).permute(0, 1, 4, 3, 2)  # B,H,N,kxk,C/H
+            attn = self.pool(x.permute(0, 3, 1, 2)).permute(0, 2, 3, 1)
 
-        h, w = math.ceil(H / self.stride), math.ceil(W / self.stride)
-        v = self.unfold(v).reshape(B, self.num_heads, C // self.num_heads,
-                                   self.kernel_size * self.kernel_size,
-                                   h * w).permute(0, 1, 4, 3, 2)  # B,H,N,kxk,C/H
-
-        attn = self.pool(x.permute(0, 3, 1, 2)).permute(0, 2, 3, 1)
         attn = self.attn(attn).reshape(
             B, h * w, self.num_heads, self.kernel_size * self.kernel_size,
             self.kernel_size * self.kernel_size).permute(0, 2, 1, 3, 4)  # B,H,N,kxk,kxk
         attn = attn * self.scale
         attn = attn.softmax(dim=-1)
         attn = self.attn_drop(attn)
-
-        x = (attn @ v).permute(0, 1, 4, 3, 2).reshape(
-            B, C * self.kernel_size * self.kernel_size, h * w)
-        x = F.fold(x, output_size=(H, W), kernel_size=self.kernel_size,
-                   padding=self.padding, stride=self.stride)
-
-        x = self.proj(x.permute(0, 2, 3, 1))
+        if self.stride == 1:
+            attn = attn.reshape(B*self.num_heads*h*w, self.kernel_size ** 2, self.kernel_size ** 2)  # BHN, kxk, kxk
+            # attn --> B, H, N, 1, (2k-1)x(2k-1)
+            attn = F.fold(attn, output_size=((self.kernel_size * 2 - 1), (self.kernel_size * 2 - 1)),
+                          kernel_size=self.kernel_size, padding=0, stride=1).reshape(B, self.num_heads, h*w, 1, -1)
+            # JK: use unfold + matmul is memory consuming, you can use ddf op to implement this
+            x = (attn @ v).transpose(1,2).reshape(B, h, w, C)
+            x = self.proj(x.permute(0, 2, 3, 1))
+        else:
+            x = (attn @ v).permute(0, 1, 4, 3, 2).reshape(
+                B, C * self.kernel_size * self.kernel_size, h * w)
+            x = F.fold(x, output_size=(H, W), kernel_size=self.kernel_size,
+                       padding=self.padding, stride=self.stride)
+            x = self.proj(x.permute(0, 2, 3, 1))
         x = self.proj_drop(x)
 
         return x
