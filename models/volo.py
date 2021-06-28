@@ -104,7 +104,7 @@ class OutlookAttention(nn.Module):
                           kernel_size=self.kernel_size, padding=0, stride=1).reshape(B, self.num_heads, h*w, 1, -1)
             # JK: use unfold + matmul is memory consuming, you can use ddf op to implement this
             x = (attn @ v).transpose(1,2).reshape(B, h, w, C)
-            x = self.proj(x.permute(0, 2, 3, 1))
+            x = self.proj(x)
         else:
             x = (attn @ v).permute(0, 1, 4, 3, 2).reshape(
                 B, C * self.kernel_size * self.kernel_size, h * w)
