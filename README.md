@@ -1,6 +1,6 @@
 # VOLO: Vision Outlooker for Visual Recognition, [arxiv](https://arxiv.org/abs/2106.13112)
 
-Note: Table 5 has a bug, and new version will be updated in ArXiv soon!
+Note: Table 5 has a typo, and new version will be updated in ArXiv soon!
 
 This is a PyTorch implementation of our paper. We present Vision Outlooker (VOLO). We show that our VOLO achieves SOTA performance on ImageNet and CityScapes. No extra training data is used in our work.
 
@@ -181,6 +181,31 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 /path/to/imagenet 
   
 </details>
 
+<details>
+<summary>
+  train volo_d3 on 224 and finetune on 448
+</summary>
+ 
+Train volo_d3 on 224 with 300 epoch, acc=85.4
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 /path/to/imagenet \
+  --model volo_d3 --img-size 224 \
+  -b 128 --lr 1.0e-3 --drop-path 0.5 --apex-amp \
+  --token-label --token-label-size 14 --token-label-data /path/to/token_label_data
+```
+
+Finetune on 448 with 30 epoch based on the pretrained checkpoint on 224, final acc=86.3 on 448
+  
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 /path/to/imagenet \
+  --model volo_d3 --img-size 448 \
+  -b 30 --lr 8.0e-6 --min-lr 4.0e-6 --drop-path 0.5 --epochs 30 --apex-amp \
+  --weight-decay 1.0e-8 --warmup-epochs 5  --ground-truth \
+  --token-label --token-label-size 24 --token-label-data /path/to/token_label_data \
+  --finetune /path/to/pretrained_224_volo_d3/
+```
+  
+</details>
 
 ## 5. Acknowledgement
 We gratefully acknowledge the support of NVIDIA AI Tech Center (NVAITC) to this research project, especially the great helps in GPU technology supports from Terry Jianxiong Yin (NVAITC) and Qingyi Tao (NVAITC).
