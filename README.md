@@ -124,7 +124,7 @@ python3 validate.py /path/to/imagenet  --model volo_d5 \
 
 ## 4. Train
 
-As we use token labeling, please download the token labeling data in [Google Drive](https://drive.google.com/file/d/1Cat8HQPSRVJFPnBLlfzVE0Exe65a_4zh/view) or [BaiDu Yun](https://pan.baidu.com/s/1Im7HMCd7T_aB-MEmdbXNng), details about token labling are in [here](https://github.com/zihangJiang/TokenLabeling).
+As we use token labeling, please download the token labeling data in [Google Drive](https://drive.google.com/file/d/1Cat8HQPSRVJFPnBLlfzVE0Exe65a_4zh/view) or [BaiDu Yun](https://pan.baidu.com/s/1YBqiNN9dAzhEXtPl61bZJw) (password: y6j2), details about token labling are in [here](https://github.com/zihangJiang/TokenLabeling).
 
 For each VOLO model, we first train it with image-size as 224 then finetune on image-size as 384 or 448/512:
 <details>
