@@ -104,6 +104,7 @@ model = volo_d1()
 load_pretrained_weights(model, "/path/to/pretrained/weights", use_ema=False, 
                         strict=False, num_classes=1000)  
 ```
+We also provide a [Colab notebook](https://colab.research.google.com/drive/1-9z1uSQtmV5ye_6IkR9amALEd2IQW8lq?usp=sharing#scrollTo=2U1918evhBz7) which run the steps to perform inference with VOLO.
 
 
 ## 3. Validation
