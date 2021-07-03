@@ -88,6 +88,7 @@ Directory structure in this repo:
 | volo_d5 ↑448|  296M     |   448 |  87.0  | [here](https://github.com/sail-sg/volo/releases/download/volo_1/d5_448_87.0.pth.tar) |
 | volo_d5 ↑512|  296M     |   512 |  87.1  | [here](https://github.com/sail-sg/volo/releases/download/volo_1/d5_512_87.07.pth.tar) |
 
+All the pretrained models can also be downloaded by [BaiDu Yun](https://pan.baidu.com/s/1l7NfploIiZX9WbTPdwT3rQ) (password: ttbp).
 
 ### Usage
 Instructions on how to use our pre-trained VOLO models:
@@ -104,7 +105,7 @@ model = volo_d1()
 load_pretrained_weights(model, "/path/to/pretrained/weights", use_ema=False, 
                         strict=False, num_classes=1000)  
 ```
-We also provide a [Colab notebook](https://colab.research.google.com/drive/1-9z1uSQtmV5ye_6IkR9amALEd2IQW8lq?usp=sharing#scrollTo=2U1918evhBz7) which run the steps to perform inference with VOLO.
+We also provide a [Colab notebook](https://colab.research.google.com/github/sail-sg/volo/blob/main/utils/volo_demo.ipynb) which run the steps to perform inference with VOLO.
 
 
 ## 3. Validation
