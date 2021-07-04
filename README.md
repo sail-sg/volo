@@ -1,7 +1,5 @@
 # VOLO: Vision Outlooker for Visual Recognition, [arxiv](https://arxiv.org/abs/2106.13112)
 
-Note: Table 5 has a typo, and new version will be updated in ArXiv soon!
-
 This is a PyTorch implementation of our paper. We present Vision Outlooker (VOLO). We show that our VOLO achieves SOTA performance on ImageNet and CityScapes. No extra training data is used in our work.
 
 ImageNet top-1 accuracy comparison with the state-of-the-art (sota) CNN-based and Transformer-based models. All results are based on the best test resolutions. Our VOLO-D5 achieves SOTA performance on ImageNet without extra data in 2021/06. 
