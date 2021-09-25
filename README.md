@@ -201,7 +201,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 /path/to/imagenet 
   --model volo_d3 --img-size 448 \
   -b 30 --lr 8.0e-6 --min-lr 4.0e-6 --drop-path 0.5 --epochs 30 --apex-amp \
   --weight-decay 1.0e-8 --warmup-epochs 5  --ground-truth \
-  --token-label --token-label-size 24 --token-label-data /path/to/token_label_data \
+  --token-label --token-label-size 28 --token-label-data /path/to/token_label_data \
   --finetune /path/to/pretrained_224_volo_d3/
 ```
   
