@@ -1,4 +1,4 @@
-# VOLO: Vision Outlooker for Visual Recognition, [arxiv](https://arxiv.org/abs/2106.13112)
+# VOLO: Vision Outlooker for Visual Recognition, [TPAMI](https://ieeexplore.ieee.org/abstract/document/9888055/), [arxiv](https://arxiv.org/abs/2106.13112)
 
 This is a PyTorch implementation of our paper. We present Vision Outlooker (VOLO). We show that our VOLO achieves SOTA performance on ImageNet and CityScapes. No extra training data is used in our work.
 
@@ -16,13 +16,12 @@ ImageNet top-1 accuracy comparison with the state-of-the-art (sota) CNN-based an
 
 ## Reference
 ```
-@misc{yuan2021volo,
-      title={VOLO: Vision Outlooker for Visual Recognition}, 
-      author={Li Yuan and Qibin Hou and Zihang Jiang and Jiashi Feng and Shuicheng Yan},
-      year={2021},
-      eprint={2106.13112},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@article{yuan2022volo,
+  title={Volo: Vision outlooker for visual recognition},
+  author={Yuan, Li and Hou, Qibin and Jiang, Zihang and Feng, Jiashi and Yan, Shuicheng},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2022},
+  publisher={IEEE}
 }
 ```
 
